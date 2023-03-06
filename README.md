@@ -1,11 +1,14 @@
+
 # Starve_free_readers_writers_problem
-int readcount; 
+int readcount; ( 
 // Number of readers accessing resources
-// initial value = 0
-
+// initial value = 0 )
+## semaphores used
+```
 semaphore mutex, read, write; 
-// initial values of all semaphores = 1  
-
+// initial values of all semaphores = 1
+```
+```
   wait(semaphore){
     if(semaphore <= 0){
     // do nothing
@@ -16,8 +19,9 @@ semaphore mutex, read, write;
   signal(semaphore){
       semaphore++
     }
+ ```
     
-//READERS CODE
+## //READERS CODE
     reader(){
     wait(read);
       wait(mutex);
@@ -36,7 +40,8 @@ semaphore mutex, read, write;
     signal(mutex);
     }
     
-//WRITERS CODE
+## //WRITERS CODE
+```
   writer(){
     wait(read);
     wait(write);
@@ -46,3 +51,11 @@ semaphore mutex, read, write;
     signal(write);  
     signal(read);
     }
+ ```
+    
+  ## Solution 
+  read,write semaphores ensures that only one of them can access resource and mutex ensures readcount value change correctly.
+  Here any number of of readers can read at a time and only one writer can write at a time.It is given turns so there will be no starvation for either readers or writers.
+ ### References
+ - Operating System Concepts by Abraham Silberschatz, Peter B. Galvin, Greg Gagne -PSK sir's Slides
+ + Wikipedia
